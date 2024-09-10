@@ -1,0 +1,12 @@
+<Dados>
+    <paciente>Carlos</paciente>
+    <procedimento>Cirugrgia</procedimento>
+    <plano>Completo</plano>
+    <dados_clinicos>Passando bem</dados_clinicos>
+</Dados>
+{
+    "paciente": "João",
+    "procedimento": "Cirurgia",
+    "plano" : "basico",
+    "dados_clinicos" : "estado grave"
+}
