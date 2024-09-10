@@ -8,6 +8,6 @@ import (
 func main() {
 	db.ConectaBanco()
 
-	r := routes.SetupRota()
-	r.Run(":8080")
+	rotas := routes.SetupRota()
+	rotas.Run(":8080")
 }

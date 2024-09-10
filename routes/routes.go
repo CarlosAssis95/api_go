@@ -8,7 +8,8 @@ import (
 
 func SetupRota() *gin.Engine {
 	r := gin.Default()
-	r.POST("/dados", controller.AdicionarDados)
+
+	r.POST("/dados", controller.AddDados)
 
 	return r
 }

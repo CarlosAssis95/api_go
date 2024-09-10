@@ -10,3 +10,15 @@
     "plano" : "basico",
     "dados_clinicos" : "estado grave"
 }
+{
+    "paciente": "Marcos",
+    "procedimento": "Cirurgia",
+    "plano" : "basico",
+    "dados_clinicos" : "estado grave"
+}
+<Dados>
+    <paciente>Jose</paciente>
+    <procedimento>Cirurgia</procedimento>
+    <plano>basico</plano>
+    <dados_clinicos>estado grave</dados_clinicos>
+</Dados>
