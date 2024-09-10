@@ -9,8 +9,6 @@ import (
 	"io"
 	"net/http"
 	"os"
-
-	"github.com/gin-gonic/gin"
 	//"github.com/gin-gonic/gin/internal/json"
 )
 
@@ -36,40 +34,41 @@ import (
 
 // }
 
-func AddDados(c *gin.Context) {
-	contentType := c.ContentType()
+func AddDados(w http.ResponseWriter, r *http.Request) {
+	contentType := r.Header.Get("Content-Type")
 
-	body, err := readRequestBody(c)
+	body, err := readRequestBody(r)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
 	dados, formattedData, err := parseData(contentType, body)
 	if err != nil {
 		if err.Error() == "unsupported content type" {
-			c.JSON(http.StatusUnsupportedMediaType, gin.H{"error": "Conteudo não suportado"})
+			http.Error(w, "Conteudo nao suportado", http.StatusUnsupportedMediaType)
 		} else {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			http.Error(w, err.Error(), http.StatusBadRequest)
 		}
 		return
 	}
 
 	if err := saveToDatabase(dados); err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
 	if err := saveToFile("SalvarDados.txt", formattedData); err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		http.Error(w, "Falha ao escrever no arquivo", http.StatusInternalServerError)
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"message": "Dados adicionados com sucesso!"})
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte(`{"message": "Dados adicionados com sucesso!"}`))
 }
 
-func readRequestBody(c *gin.Context) ([]byte, error) {
-	body, err := io.ReadAll(c.Request.Body)
+func readRequestBody(r *http.Request) ([]byte, error) {
+	body, err := io.ReadAll(r.Body)
 	if err != nil {
 		return nil, err
 	}

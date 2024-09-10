@@ -2,14 +2,11 @@ package routes
 
 import (
 	"integracaomobilemed/controller"
-
-	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
-func SetupRota() *gin.Engine {
-	r := gin.Default()
+func SetupRota() {
 
-	r.POST("/dados", controller.AddDados)
+	http.HandleFunc("/dados", controller.AddDados)
 
-	return r
 }

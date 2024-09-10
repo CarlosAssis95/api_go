@@ -22,3 +22,15 @@
     <plano>basico</plano>
     <dados_clinicos>estado grave</dados_clinicos>
 </Dados>
+<Dados>
+    <paciente>Matheus</paciente>
+    <procedimento>Cirurgia</procedimento>
+    <plano>basico</plano>
+    <dados_clinicos>estado leve</dados_clinicos>
+</Dados>
+{
+    "paciente": "Manoel",
+    "procedimento": "Raio-x",
+    "plano": "completo",
+    "dados_clinicos": "estado de saude bom"
+}
