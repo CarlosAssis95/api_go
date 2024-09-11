@@ -2,40 +2,13 @@ package controller
 
 import (
 	"encoding/json"
-	"encoding/xml"
-	"errors"
 	"integracaomobilemed/db"
 	"integracaomobilemed/models"
 	"io"
 	"net/http"
 	"os"
-	//"github.com/gin-gonic/gin/internal/json"
 )
-
-// func AdicionarDados(c *gin.Context) {
-// 	var dados models.Dados
-
-// 	contentType := c.ContentType()
-
-// 	switch contentType {
-// 	case "application/json":
-// 		if err := c.BindJSON(&dados); err != nil {
-// 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-// 			return
-// 		}
-// 	case "application/xml":
-// 		if err := c.BindXML(&dados); err != nil {
-// 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-// 			return
-// 		}
-// 	}
-
-// 	c.JSON(http.StatusOK, gin.H{"message": "Dados adicionados com sucesso!"})
-
-// }
-
 func AddDados(w http.ResponseWriter, r *http.Request) {
-	contentType := r.Header.Get("Content-Type")
 
 	body, err := readRequestBody(r)
 	if err != nil {
@@ -43,7 +16,7 @@ func AddDados(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	dados, formattedData, err := parseData(contentType, body)
+	dados, formattedData, err := parseData(body)
 	if err != nil {
 		if err.Error() == "unsupported content type" {
 			http.Error(w, "Conteudo nao suportado", http.StatusUnsupportedMediaType)
@@ -76,35 +49,26 @@ func readRequestBody(r *http.Request) ([]byte, error) {
 	return body, nil
 }
 
-func parseData(contentType string, body []byte) (models.Dados, string, error) {
+func parseData(body []byte) (models.Dados, string, error) {
 	var dados models.Dados
 	var formattedData string
 
-	switch contentType {
-
-	case "application/json":
-		if err := json.Unmarshal(body, &dados); err != nil {
-			return dados, "", err
-		}
-		formattedData = string(body)
-
-	case "application/xml":
-		if err := xml.Unmarshal(body, &dados); err != nil {
-			return dados, "", err
-		}
-		formattedData = string(body)
-
-	default:
-		return dados, "", errors.New("unsupported content type")
+	if err := json.Unmarshal(body, &dados); err != nil {
+		return dados, "", err
 	}
+	formattedData = string(body)
 
 	return dados, formattedData, nil
 }
 
 func saveToDatabase(dados models.Dados) error {
-	query := `INSERT INTO Dados (paciente, procedimento, plano, dados_clinicos)
-		VALUES ($1, $2, $3, $4)`
-	_, err := db.DB.Exec(query, dados.Paciente, dados.Procedimento, dados.Plano, dados.Dados_clinicos)
+	query := `INSERT INTO Dados (ds_operacao, ds_paciente, cd_paciente, dt_nascimento, ds_sexo, ds_accession_number, 
+	nr_identificador, ds_procedimento, ds_medico, ds_crm_nr, ds_crm_uf, bb_laudo, bb_rtf, dt_assinatura, dt_data,
+	medico_solicitante, codigo_procedimento, tipo_exame, modalidade)
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19)`
+	_, err := db.DB.Exec(query, dados.Operacao, dados.NomePaciente, dados.PatientID, dados.DataNascimento, dados.Sexo, dados.AccessionNumber,
+		dados.IdentificadorUnico, dados.Procedimento, dados.MedicoRadiologista, dados.CRMNR, dados.CRMUF, dados.Laudo, dados.LaudoRTF, dados.DataAssinatura,
+		dados.DataExame, dados.Medico_solicitante, dados.Codigo_procedimento, dados.Tipo_exame, dados.Modalidade)
 	return err
 }
 
