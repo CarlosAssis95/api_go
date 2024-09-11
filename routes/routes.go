@@ -2,11 +2,14 @@ package routes
 
 import (
 	"integracaomobilemed/controller"
-	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
-func SetupRota() {
+func SetupRota() *mux.Router {
+    router := mux.NewRouter()
 
-	http.HandleFunc("/dados", controller.AddDados)
+    router.HandleFunc("/dados", controller.AddDados).Methods("POST")
 
+    return router
 }

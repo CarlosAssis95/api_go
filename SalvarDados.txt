@@ -1,4 +1,4 @@
-{
+11-09-2024 15:12:27 accessionNumber 67890  {
     "Operacao": "some operation",
     "NomePaciente": "John Doe",
     "PatientID": 12345,
