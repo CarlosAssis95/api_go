@@ -1,16 +1,17 @@
 package main
 
 import (
-<<<<<<< Updated upstream
-	"integracaomobilemed/db"
-=======
 	"fmt"
->>>>>>> Stashed changes
 	"integracaomobilemed/routes"
+	"net/http"
 )
 
 func main() {
 
-	rotas := routes.SetupRota()
-	rotas.Run(":8080")
+	router := routes.SetupRota()
+
+	fmt.Println("Iniciando o servidor na porta 8080...")
+	if err := http.ListenAndServe(":8080", router); err != nil {
+		fmt.Printf("Erro ao iniciar o servidor: %v\n", err)
+	}
 }

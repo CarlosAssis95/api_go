@@ -1,30 +1,4 @@
-<Dados>
-    <paciente>Carlos</paciente>
-    <procedimento>Cirugrgia</procedimento>
-    <plano>Completo</plano>
-    <dados_clinicos>Passando bem</dados_clinicos>
-</Dados>
-{
-    "paciente": "João",
-    "procedimento": "Cirurgia",
-    "plano" : "basico",
-    "dados_clinicos" : "estado grave"
-}
-<<<<<<< Updated upstream
-{
-    "paciente": "Marcos",
-    "procedimento": "Cirurgia",
-    "plano" : "basico",
-    "dados_clinicos" : "estado grave"
-}
-<Dados>
-    <paciente>Jose</paciente>
-    <procedimento>Cirurgia</procedimento>
-    <plano>basico</plano>
-    <dados_clinicos>estado grave</dados_clinicos>
-</Dados>
-=======
-12-09-2024 10:05:45 accessionNumber 67890  {
+11-09-2024 15:12:27 accessionNumber 67890  {
     "Operacao": "some operation",
     "NomePaciente": "John Doe",
     "PatientID": 12345,
@@ -45,4 +19,24 @@
     "tipoExame": "X-ray",
     "modalidade": "CT"
 }
->>>>>>> Stashed changes
+12-09-2024 10:27:39 accessionNumber 67890  {
+    "Operacao": "some operation",
+    "NomePaciente": "John Doe",
+    "PatientID": 12345,
+    "DataNascimento": "1980-01-01",
+    "Sexo": "M",
+    "AccessionNumber": 67890,
+    "IdentificadorUnico": 112233,
+    "Procedimento": "some procedure",
+    "MedicoRadiologista": "Dr. Smith",
+    "CRMNR": "123456",
+    "CRMUF": "SP",
+    "Laudo": "some laudo",
+    "LaudoRTF": "some laudo RTF",
+    "DataAssinatura": "2023-01-01",
+    "DataExame": "2023-01-02",
+    "medicoSolicitante": "Dr. Jones",
+    "codigoProcedimento": "ABC123",
+    "tipoExame": "X-ray",
+    "modalidade": "CT"
+}

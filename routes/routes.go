@@ -5,17 +5,9 @@ import (
 	"integracaomobilemed/db"
 	"integracaomobilemed/repository"
 
-	"github.com/gin-gonic/gin"
+	"github.com/gorilla/mux"
 )
 
-<<<<<<< Updated upstream
-func SetupRota() *gin.Engine {
-	r := gin.Default()
-
-	r.POST("/dados", controller.AddDados)
-
-	return r
-=======
 func SetupRota() *mux.Router {
 	router := mux.NewRouter()
 
@@ -27,5 +19,4 @@ func SetupRota() *mux.Router {
 	router.HandleFunc("/dados", controller.AddDados).Methods("POST")
 
 	return router
->>>>>>> Stashed changes
 }
