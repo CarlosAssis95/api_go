@@ -1,12 +1,15 @@
 package main
 
 import (
+<<<<<<< Updated upstream
 	"integracaomobilemed/db"
+=======
+	"fmt"
+>>>>>>> Stashed changes
 	"integracaomobilemed/routes"
 )
 
 func main() {
-	db.ConectaBanco()
 
 	rotas := routes.SetupRota()
 	rotas.Run(":8080")
